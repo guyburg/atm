@@ -1,0 +1,48 @@
+Python ATM Exam:
+
+You will write an ATM (Automatic Teller Machine) in Python.
+It will work as follows.
+When run, the user will be displayed with a menu:
+
+1. Login
+2. Quit
+
+If the user selects 1, he will be prompted to enter a password.
+If the password is correct, the user will log in.
+The ATM supports several users. There is no username.
+Instead, a user is identified only through a unique password.
+If the user selects "Quit", the application will exit
+
+After a user has logged in, the following menu will appear:
+
+1. Check Balance
+2. Deposit
+3. Withdraw
+4. Logoff
+
+
+The following describes the supported actions:
+
+* Check Balance - Displays the current balance in the user’s account
+* Deposit       - Prompts the user for an amount of money to deposit.
+                  Increases the balance with the amount provided
+* Withdraw      - Prompts the user to specify an amount of money to withdraw
+                  from the account.
+                  If the account has an empty balance, disallow the transaction
+* Logout        - Logs out the current user and returns to the original
+                  login menu
+
+When implementing this exercise,
+here are a few things to take into consideration:
+Try to clearly separate classes to clear units of responsibility.
+Properly abstract the code. Bad user input shouldn't cause the
+application to terminate 
+
+Useful resources:
+* Python Tutorial
+
+I recommend using the standard Python development environment found on python.org
+
+Let me know if you have any questions. 
+
+Thanks!
