@@ -2,6 +2,8 @@ from user import User
 
 
 class Prompt(object):
+    # Type that knows to display message and process user input
+
     def __init__(self):
         self.message = self._get_message()
 

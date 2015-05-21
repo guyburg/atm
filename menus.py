@@ -5,12 +5,14 @@ from prompts import Password, Deposit, Withdraw
 
 
 class Menu(object):
+    # Type that knows to display message and options, and direct the user to a prompt or menu base on the user choice
+
     def __init__(self, message, options):
         self.message = message
         self.options = options
 
     def exit(self):
-        self.display_message('bye bye')
+        self.display_message('bye, bye.')
         sys.exit()
 
     def display_message(self, message=None):

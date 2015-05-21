@@ -1,3 +1,5 @@
+import hashlib
+
 from backend import Backend
 
 
@@ -7,10 +9,10 @@ class User(object):
         self.password = password
         self.balance = balance
 
-    @staticmethod
-    def get_user(password):
+    @classmethod
+    def get_user(cls, password):
         with Backend() as db:
-            cur_obj = db.cur.execute("SELECT * FROM Users WHERE Password=:password", {"password": password})
+            cur_obj = db.cur.execute("SELECT * FROM Users WHERE Password=:password", {"password": cls.password_hash(password)})
             try:
                 cur_user = cur_obj.next()
                 return User(cur_user[0], cur_user[1], cur_user[2])
@@ -33,4 +35,11 @@ class User(object):
             db.cur.execute("UPDATE Users SET Balance=? WHERE Id=?", (amount, self.user_id))
             db.con.commit()
         self.balance = amount
+
+    @staticmethod
+    def password_hash(password):
+        # Not to write plain pass to DB
+        h = hashlib.sha256()
+        h.update(password)
+        return h.hexdigest()
 
