@@ -15,11 +15,13 @@ if __name__ == '__main__':
     for user in users:
         user[0] = User.password_hash(user[0])
 
+    # Create Users table and insert test users
     with Backend() as db:
         db.cur.execute('DROP TABLE IF EXISTS Users')
         db.cur.execute('CREATE TABLE IF NOT EXISTS Users(Id INTEGER PRIMARY KEY AUTOINCREMENT, Password TEXT NOT NULL UNIQUE, Balance INT)')
         db.cur.executemany("INSERT INTO Users(Password, Balance) VALUES(?, ?)", users)
         db.con.commit()
 
+    # Start the app in the Login menu
     menu = Login()
     menu.go()
