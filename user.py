@@ -2,8 +2,8 @@ from backend import Backend
 
 
 class User(object):
-    def __init__(self, id, password, balance):
-        self.user_id = id
+    def __init__(self, user_id, password, balance):
+        self.user_id = user_id
         self.password = password
         self.balance = balance
 
@@ -17,7 +17,7 @@ class User(object):
             except StopIteration:
                 return None
 
-    def balance(self):
+    def get_balance(self):
         return self.balance
 
     def deposit(self, amount):
@@ -32,18 +32,5 @@ class User(object):
         with Backend() as db:
             db.cur.execute("UPDATE Users SET Balance=? WHERE Id=?", (amount, self.user_id))
             db.con.commit()
+        self.balance = amount
 
-
-if __name__ == '__main__':
-    users = (
-        ('aaa', 33),
-        ('bbb', 44),
-        ('ccc', 754745)
-    )
-    with Backend() as db:
-        db.cur.execute('DROP TABLE IF EXISTS Users')
-        db.cur.execute('CREATE TABLE IF NOT EXISTS Users(Id INTEGER PRIMARY KEY AUTOINCREMENT, Password TEXT NOT NULL UNIQUE, Balance INT)')
-        db.cur.executemany("INSERT INTO Users(Password, Balance) VALUES(?, ?)", users)
-        db.con.commit()
-    user = User.get_user('aaa')
-    user.deposit(300)
