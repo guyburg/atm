@@ -56,7 +56,7 @@ class MoneyOperation(Prompt):
             self.display_message("Please enter a number.")
             self.go(user)
         else:
-            self._process_amount(user, choice)
+            self._process_amount(choice, user)
 
             self.display_message("Your new balance is {0}: ".format(user.get_balance()))
             menu = Actions()
@@ -65,7 +65,7 @@ class MoneyOperation(Prompt):
     def _operation_name(self):
         raise NotImplemented
 
-    def _process_amount(self, user, amount):
+    def _process_amount(self, amount, user):
         raise NotImplemented
 
 
@@ -73,7 +73,7 @@ class Deposit(MoneyOperation):
     def _operation_name(self):
         return "deposit"
 
-    def _process_amount(self, user, amount):
+    def _process_amount(self, amount, user):
         user.deposit(amount)
 
 
@@ -81,5 +81,5 @@ class Withdraw(MoneyOperation):
     def _operation_name(self):
         return "withdraw"
 
-    def _process_amount(self, user, amount):
+    def _process_amount(self, amount, user):
         user.withdraw(amount)
